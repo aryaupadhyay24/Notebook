@@ -6,58 +6,10 @@ import NoteContext from "./NoteContext";
 
 const NoteState = (props) => {
     const host = 'http://localhost';
-    const intialState = [
-        {
-            title: "hello",
-            description: "why rthis  kolavari ",
-            _id: "134561"
-
-        },
-        {
-            title: "fsidnafo",
-            description: "iofoiweefvs",
-            _id: "134562"
-
-        },
-        {
-            title: "hello",
-            description: "why rthis  kolavari ",
-            _id: "134563"
-
-        },
-        {
-            title: "fsidnafo",
-            description: "iofoiweefvs",
-            _id: "134564"
-
-        },
-        {
-            title: "hello",
-            description: "why rthis  kolavari ",
-            _id: "134565"
-
-        },
-        {
-            title: "fsidnafo",
-            description: "iofoiweefvs",
-            _id: "134566"
-
-        },
-        {
-            title: "hello",
-            description: "why rthis  kolavari ",
-            _id: "134567"
-
-        },
-        {
-            title: "fsidnafo",
-            description: "iofoiweefvs",
-            _id: "134568"
-
-        }
-
-    ];
-    const [notes, setNote] = useState(intialState);
+   
+    const [student, setStudent] = useState("");
+    const [roll,setRoll]= useState(1);
+    const [particular,setParticular]=useState("");
 
     // now we have to do api fetch to connnect our functionality wiht oiur database
     // i know how to fetch from an api 
@@ -65,93 +17,99 @@ const NoteState = (props) => {
     // samjh aa gya ki hum fetch function me endpoint ke sath sath use headers aur body bhi de sktw hai
     // let me show you this
     // create a fucntion fetchallnotes
-    const fetchallnotes = async () => {
-        console.log("dsfnodsv");
+    const fetchallStudent = async () => {
+        // console.log("dsfnodsv");
         try {
-            console.log("dsfnodsv");
+            // console.log("dsfnodsv");
 
-            const response = await fetch(`${host}/apinote/fetchnote`, {
+            const response = await fetch(`${host}/student/get`, {
                 method: 'GET',
                 headers: {
 
 
                     'Content-Type': 'application/json',
 
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM5ZmY0ZGY1MGQ2MDEzMmZmZGVhMDA4In0sImlhdCI6MTY3MTQzMjU2NH0.dGvqJXcZ7nh6goO1ziH7b616-cqd-FhOHU7-Gs7T1Aw"
+                    
 
                 },
 
             });
-            console.log("dsfnodsv");
-            console.log(response);
+            
+            
 
             const json = await response.json();
-            console.log("dsfnodsv");
-
-            setNote(json);
+            console.log(json);
+         
+            setStudent(json);
             console.log("feych note is runnign");
         }
         catch (err) {
             console.log(err);
         }
     }
-    const addNote = async (title, description, tag) => {
 
+
+    const addStudent = async (newly) => {
+        setRoll(roll+1);
+        console.log("running ")
+        const{firstName,middleName,lastName,selectClass,selectDivision,addressLine1,addressLine2,landmark,city,pincode}=newly
+        console.log(firstName,middleName,lastName,selectClass,selectDivision,roll,addressLine1,addressLine2,landmark,city,pincode)
         try {
-            console.log("dsfnodsv");
+            // console.log("dsfnodsv");
 
-            const response = await fetch(`${host}/apinote/addnote`, {
+            const response = await fetch(`${host}/student/add`, {
                 method: 'POST',
                 headers: {
 
 
                     'Content-Type': 'application/json',
 
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM5ZmY0ZGY1MGQ2MDEzMmZmZGVhMDA4In0sImlhdCI6MTY3MTQzMjU2NH0.dGvqJXcZ7nh6goO1ziH7b616-cqd-FhOHU7-Gs7T1Aw"
+                    
 
 
 
                 },
-                body: JSON.stringify({ title, description, tag })
+                body: JSON.stringify({firstName,middleName,lastName,selectClass,selectDivision,rollNo:roll,addressLine1,addressLine2,landmark,city,pincode})
 
             });
             console.log("addd note is running");
-            const newNote = { title, description, tag };
-            setNote(notes.concat(newNote));
+            const newStudent = { firstName,middleName,lastName,selectClass,selectDivision,rollNo:roll,addressLine1,addressLine2,landmark,city,pincode};
+            setStudent(student.concat(newStudent));
+            console.log(student);
         }
         catch (err) {
             console.log(err);
         }
 
     }
-
-
-
-
-    const deleteNote =async (id) => {
+    const particularStudent =async (id) => {
         // now i have to think how to dlete note
         try {
-            console.log("dsfnodsv");
+            
 
-            const response = await fetch(`${host}/apinote/deletenote/${id}`, {
+            const response = await fetch(`${host}/student//${id}`, {
                 method: 'DELETE',
                 headers: {
 
 
                     'Content-Type': 'application/json',
 
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM5ZmY0ZGY1MGQ2MDEzMmZmZGVhMDA4In0sImlhdCI6MTY3MTQzMjU2NH0.dGvqJXcZ7nh6goO1ziH7b616-cqd-FhOHU7-Gs7T1Aw"
+                    
 
 
 
                 },
 
             });
-            const newNote = notes.filter((note) => {
-                return note._id !== id;
+            // const newStudent = student.filter((note) => {
+            //     return note._id !== id;
     
-            })
-            setNote(newNote);
+            // })
+            // setNote(newStudent);
+            const json = await response.json();
+            console.log(json);
+            setParticular(json);
+
         }
         catch (err) {
             console.log(err);
@@ -164,40 +122,104 @@ const NoteState = (props) => {
 
 
 
-    const updateNote =async (id,title,description,tag) => {
+
+    const deleteStudent =async (id) => {
+        // now i have to think how to dlete note
+        try {
+            console.log("dsfnodsv");
+
+            const response = await fetch(`${host}/student/${id}`, {
+                method: 'DELETE',
+                headers: {
+
+
+                    'Content-Type': 'application/json',
+
+                    
+
+
+
+                },
+
+            });
+            const newStudent = student.filter((note) => {
+                return note._id !== id;
+    
+            })
+            setStudent(newStudent);
+        }
+        catch (err) {
+            console.log(err);
+        }
+
+
+        
+
+    }
+
+
+
+
+    const updateStudent=async (firstName,middleName,lastName,addressLine1,addressLine2,city,pincode,id) => {
+        console.log("print ho rha hai  "  ,firstName,middleName,lastName,addressLine1,addressLine2,city,pincode,id)
         // when we click on edit iconn there should appear a modal which where we will type our new title etc
         // now let's create a modal ffrom boootstrap
         try {
             console.log("dsfnodsv");
 
-            const response = await fetch(`${host}/apinote/updatenote/${id}`, {
+            const response = await fetch(`${host}/student/${id}`, {
                 method: 'PUT',
                 headers: {
 
 
                     'Content-Type': 'application/json',
 
-                    "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM5ZmY0ZGY1MGQ2MDEzMmZmZGVhMDA4In0sImlhdCI6MTY3MTQzMjU2NH0.dGvqJXcZ7nh6goO1ziH7b616-cqd-FhOHU7-Gs7T1Aw"
-
+                   
 
 
                 },
-                body: JSON.stringify({ title, description, tag })
+                body: JSON.stringify({firstName,middleName,lastName,addressLine1,addressLine2,city,pincode })
 
             });
             // upar to mera backend ka kaam ho gya lekin frontend me change karne ke liye i have change notes
-            const newNote=JSON.parse(JSON.stringify(notes));
-            for(let i=0;i<newNote.length;i++){
-                const element=newNote[i];
+            const newStudent=JSON.parse(JSON.stringify(student));
+            for(let i=0;i<newStudent.length;i++){
+                const element=newStudent[i];
                 if(element._id===id){
-                    newNote[i].title=title;
-                    newNote[i].description=description;
-                    newNote[i].tag=tag;
+                    newStudent[i].firstName=firstName;
+                    if(middleName){
+                        newStudent[i].middleName=middleName;
+                    }
+                    if(lastName){
+                    newStudent[i].lastName=lastName;
+                    }
+                    // newStudent[i].selectClass=selectClass;
+
+                    // newStudent[i].selectDivision=selectDivision;
+                    
+                    if(addressLine1){
+                    
+                    newStudent[i].addressLine1=addressLine1;
+                    }
+                    if(addressLine2){
+
+                    newStudent[i].addressLine2=addressLine2;
+                    }
+                    if(city){
+
+                    newStudent[i].city=city;
+                    }
+                    if(pincode){
+                    newStudent[i].pincode=pincode;
+                    }
+
+
                     break;
                 }
             }
-            console.log(newNote);
-            setNote(newNote);
+            console.log("newStudent   ",newStudent);
+            setStudent(newStudent);
+
         }
         catch (err) {
             console.log(err);
@@ -206,10 +228,10 @@ const NoteState = (props) => {
 
 
     }
-
+    
 
     return (
-        <NoteContext.Provider value={{ notes, setNote, addNote, deleteNote, updateNote, fetchallnotes }}>
+        <NoteContext.Provider value={{ student,addStudent,roll,setStudent,fetchallStudent,deleteStudent,updateStudent}}>
             {props.children}
 
 

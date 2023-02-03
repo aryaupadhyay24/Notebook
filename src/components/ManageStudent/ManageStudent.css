@@ -1,0 +1,22 @@
+.andar{
+    margin-top: 308px;
+}
+.fulldetails{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* background-color: red; */
+    width: 100%;
+    /* display: none; */
+}
+.yehai{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.detailtype{
+    /* color: white; */
+    
+}
+.detailvalue{
+    /* color: white; */
+}

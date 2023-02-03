@@ -1,0 +1,43 @@
+.cover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100vh;
+    
+    position: relative;
+    
+}
+.hello{
+    margin-bottom: 32px;
+}
+
+.sidebar_item{
+    font-weight: 500;
+    font-size: 19px;
+    color: grey;
+    margin-top: 4px;
+    padding-top: 4px;
+    padding-bottom: 7px;
+    text-decoration: none;
+    
+}
+.sidebar_item:focus{
+    background-color: red;
+    color: white;
+    
+    
+}
+.sidebar_item:hover{
+    background-color: red;
+    color: white;
+    text-decoration: none;
+}
+.inside .logo{
+    font-size: 28px;
+    font-weight: 600;
+    color: grey;
+    position: absolute;
+    top: 15px;
+}
+
+

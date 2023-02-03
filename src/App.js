@@ -1,13 +1,14 @@
 
 import './App.css';
-import Navbar from './components/Navbar';
+
 import { Routes, Route } from "react-router-dom";
-import About from './components/About';
-import Home from './components/Home';
+
 import NoteState from './components/context/NoteState';
-import Login from './components/Login';
-import Signup from './components/Signup';
+
 import { useState } from 'react';
+import AddStudent from './components/AddStudent/AddStudent';
+import ManageStudent from './components/ManageStudent/ManageStudent';
+import Sidebar from './components/sidebar/Sidebar';
 
 
 
@@ -27,7 +28,7 @@ function App() {
   }
   return (
     <NoteState>
-      <div className="App">
+      {/* <div className="App">
         <Navbar />
 
         <Routes>
@@ -41,7 +42,23 @@ function App() {
 
         </Routes>
 
+
+      </div> */}
+      <div className="wrapper">
+        <div className="contain">
+          <div className="sidebar2">
+            <Sidebar/>
+          </div>
+          <div className="maincontent">
+            <Routes>
+              <Route path="/" element={<AddStudent/>} />
+              <Route path="/manage" element={<ManageStudent />} />
+            </Routes>
+          </div>
+        </div>
       </div>
+
+
     </NoteState>
   );
 }
